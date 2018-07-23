@@ -52,13 +52,6 @@ def check_multiple_urls():
     last_update_time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
     returned_statuses = statuses
 
-filename = 'checkurls.json'
-with open(filename) as f:
-    checkurls = json.load(f)
-
-returned_statuses = {}
-last_update_time = 'time string'
-
 app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
@@ -76,7 +69,13 @@ def display_returned_api():
         returned_statuses
         ),200
 
+filename = 'checkurls.json'
+with open(filename) as f:
+    checkurls = json.load(f)
+
+returned_statuses = {}
+last_update_time = 'time string'
+
 if __name__ == '__main__':
     check_multiple_urls()
     app.run()
-    
