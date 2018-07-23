@@ -19,8 +19,7 @@ def has_dns(url):
         return True
 
 def get_status_code(url):
-	""" This function returns the
-	status code of the url. """
+	""" This function returns the status code of the url. """
 	status_code = requests.get(url).status_code
 	return status_code
 
@@ -79,3 +78,4 @@ last_update_time = 'time string'
 if __name__ == '__main__':
     check_multiple_urls()
     app.run()
+    
