@@ -4,10 +4,12 @@
         "http://www.bbc.co.uk",
         "https://doesnotexist.bbc.co.uk",
         "https://www.bbc.co.uk/sport",
-        "https://www.bbc.co.uk/404"
+        "https://www.bbc.co.uk/404",
+        "https://www.bbc.co.uk:90"
         ],
 "Google": [
         "https://www.google.com",
-        "https://support.google.com"
+        "https://support.google.com",
+        "http://localhost:8080"
         ]
 }
