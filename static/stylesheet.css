@@ -1,0 +1,17 @@
+.time_updated {
+	font-size: 12px;
+	text-align: right;
+}
+.group {
+    font-size: 20px;
+    text-indent: 2px;
+}
+.good_url {	
+    font-size: 12px;
+    text-indent: 10px;
+}
+.bad_url {
+    font-size: 10px;
+    text-indent: 10px;
+    color: grey;
+}
