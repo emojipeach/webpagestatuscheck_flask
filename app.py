@@ -10,7 +10,7 @@ from time import gmtime, strftime
 
 def has_dns(url):
     """ This function checks to see if a host name has a DNS entry
-    by checking for socket info. """
+    by checking for socket info."""
     try:
         gethostbyname(url)
     except gaierror:
@@ -19,13 +19,13 @@ def has_dns(url):
         return True
 
 def get_status_code(url):
-	""" This function returns the status code of the url. """
+	""" This function returns the status code of the url."""
 	status_code = requests.get(url).status_code
 	return status_code
 
 def check_single_url(url):
     """This function checks a single url and if connectable returns
-    the status code, else returns UNREACHABLE"""
+    the status code, else returns UNREACHABLE."""
     if has_dns(urlparse(url).hostname) == True:
         return str(get_status_code(url))
     else:
