@@ -15,7 +15,7 @@ def is_reachable(url):
     by checking for socket info."""
     try:
         gethostbyname(url)
-    except (gaierror):
+    except gaierror:
         return False
     else:
         return True
@@ -46,6 +46,7 @@ def launch_checker():
     t(refresh_interval, launch_checker).start()
     global returned_statuses
     returned_statuses = check_multiple_urls()
+
 
 def check_multiple_urls():
     """This function checks through urls specified in the checkurls.json file
