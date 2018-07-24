@@ -5,9 +5,4 @@ The app reads a list of urls in JSON format, checks their current status and dis
 
 The current status of each url is checked every 60 seconds (interval can be changed in settings.py). The app is multithreaded and loads 8 urls concurrently. These are utilised until all updates are complete for that checking cycle.
 
-If one of the urls gives a timeout it may initially take 60 seconds for the web server to load up. 
-
-## Donations
-
-BTC: 39ZxvxsssJ86doV4C3iFxRoABENyhh481J
-XMR: 46oVELZ92Qr1b9hF92xUp7aJp628sLY66XPTVmhuxEo8SWPWVZJHHWk5ZNDqTEGa18ceoNns2putcVfqzAAH5Qz1RLypdqn
+If one of the urls gives a timeout it may initially take 60 seconds for the web server to load.
