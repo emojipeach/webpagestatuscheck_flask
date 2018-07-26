@@ -9,3 +9,6 @@ site_down = 'UNREACHABLE'
 
 """ Number of concurrent connections while checking sites. """
 number_threads = 8
+
+""" Enable a user submitted search through urls to verify they're in the file specified in 'filename'. """
+include_search = True
