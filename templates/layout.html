@@ -4,14 +4,59 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>A Simple Website Status Checker</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}">
+    
+<style>
+body {
+	margin: 0;
+	padding: 0;
+}
+.time_updated {
+	font-size: 12px;
+	text-align: right;
+}
+.search-results {
+	font-size: 16px;
+}
+.search-header {
+	font-size: 22px;
+}
+.search-form {
+	font-size: 18px;
+	text-align: right;
+}
+.set-input-width {
+  width: 220px;
+}
+.is-center {
+	text-align: center;
+}
+.group {
+    font-size: 20px;
+    text-indent: 2px;
+}
+.good-url {	
+    font-size: 12px;
+    text-indent: 10px;
+}
+.bad-url {
+    font-size: 10px;
+    text-indent: 10px;
+    color: grey;
+}
+.good-color {
+	color: green;
+}
+.bad-color {
+	color: red;
+}
+</style>
 
 </head>
 <body>
 <font face="Courier">
  
     {% block body %}{% endblock %}
-
+ 
 </face>
 </body>
 </html>
