@@ -1,0 +1,17 @@
+{% if results[0] == True %}
+
+<font class = "good-color search-header"><p class = "search-results is-center">Great!</font>
+<br/>
+{{ results[1] }}
+<br/>
+is a verified URL!</p>
+
+{% else %}
+
+<font class = "bad-color search-header"><p class = "search-results is-center">Beware!</font>
+<br/>
+{{ results[1] }}
+<br/>
+is NOT a known URL!</p>
+
+{% endif %}
