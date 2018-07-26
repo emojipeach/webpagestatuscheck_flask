@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="time_updated">Last updated: {{ last_update_time }} UTC</div>
+
+{% if request.method == 'POST' %}
+    {% include 'result_field.html' %}
+{% else %}
+    {% include 'search_field.html' %}
+{% endif %}
+
+{% for group, urls in checkurls.items() %}
+ 
+    <h1 class="group">{{ group }}</h1>
+    {% for url in urls %}
+        {% if returned_statuses.get(url) == "200" %}
+            <p class="good-url">{{ url }} <font class="good-color"> {{ returned_statuses.get(url) }}</font></p>
+        {% endif %}
+    {% endfor %}
+    
+    {% for url in urls %}
+        {% if returned_statuses.get(url) == "200" %}
+        {% else %}
+            <p class="bad-url">{{ url }} <font class="bad-color"> {{ returned_statuses.get(url) }}</font></p>
+        {% endif %}
+    {% endfor %}
+    
+{% endfor %}
+ 
+{% endblock %}
