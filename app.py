@@ -4,10 +4,10 @@ import threading
 from socket import gaierror, gethostbyname
 from multiprocessing.dummy import Pool as ThreadPool
 from urllib.parse import urlparse
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, escape, jsonify
 from time import gmtime, strftime
 
-from settings import refresh_interval, filename, site_down, number_threads
+from settings import refresh_interval, filename, site_down, number_threads, include_search
 
 
 def is_reachable(url):
@@ -53,19 +53,41 @@ def check_multiple_urls():
     (specified in the filename variable) and
     returns their statuses as a dictionary."""
     statuses = {}
-    temp_list_urls = []
     temp_list_statuses = []
     global last_update_time
-    for group, urls in checkurls.items():
-        for url in urls:
-            temp_list_urls.append(url)
     pool = ThreadPool(number_threads)
-    temp_list_statuses = pool.map(check_single_url, temp_list_urls)
-    for i in range(len(temp_list_urls)):
-        statuses[temp_list_urls[i]] = temp_list_statuses[i]
+    temp_list_statuses = pool.map(check_single_url, list_urls)
+    for i in range(len(list_urls)):
+        statuses[list_urls[i]] = temp_list_statuses[i]
     last_update_time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
     return statuses
 
+def compare_submitted(submitted):
+    """This function checks whether the value in the dictionary is found in 
+    the checkurls.json file. """
+    stripped_submission = https_start_strip(submitted)
+    if stripped_submission in list_urls:
+        flaggy = True
+    else:
+        flaggy = False
+    return (flaggy, stripped_submission)
+
+def https_start_strip(url):
+    url = url.strip().lower()
+    if url[:7] == 'http://':
+        return url
+    elif url[:8] == 'https://':
+        return url
+    else:
+        url = "https://" + url
+        return url
+
+def generate_list_urls(input_dict):
+    list_urls = []
+    for group, urls in input_dict.items():
+        for url in urls:
+            list_urls.append(url)
+    return list_urls
 
 app = Flask(__name__)
 
@@ -73,7 +95,21 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def display_returned_statuses():
     return render_template(
-        'returned_statuses.html',
+        'index.html',
+        returned_statuses = returned_statuses,
+        checkurls = checkurls,
+        last_update_time = last_update_time,
+        include_search = include_search
+        )
+        
+
+@app.route('/result',methods = ['POST'])
+def result():
+    if request.method == 'POST':
+        results = compare_submitted(escape(request.form['submitted']))
+        return render_template(
+        'index.html',
+        results = results,
         returned_statuses = returned_statuses,
         checkurls = checkurls,
         last_update_time = last_update_time
@@ -89,6 +125,7 @@ def display_returned_api():
 
 with open(filename) as f:
     checkurls = json.load(f)
+list_urls = generate_list_urls(checkurls)
 returned_statuses = {}
 last_update_time = 'time string'
 
