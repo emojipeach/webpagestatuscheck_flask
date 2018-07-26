@@ -1,0 +1,11 @@
+{% if include_search == True %}
+
+<form action = "{{ url_for('result') }}" method = "POST">
+    <p class = "is-center">
+        <input class = "set-input-width is-center" type = "text" name = "submitted" />
+    <br/>
+        <input class = "is-center" type = "submit" value = "Search verified URLs" />
+    </p>
+</form>
+
+{% endif %}
