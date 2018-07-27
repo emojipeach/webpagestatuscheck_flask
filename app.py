@@ -42,8 +42,9 @@ def check_single_url(url):
 def launch_checker():
     """This function launches the check_multiple_urls function every x seconds
     (defined in refresh interval variable)."""
-    t = threading.Timer
-    t(refresh_interval, launch_checker).start()
+    t = threading.Timer(refresh_interval, launch_checker)
+    t.daemon=True
+    t.start()
     global returned_statuses
     returned_statuses = check_multiple_urls()
 
